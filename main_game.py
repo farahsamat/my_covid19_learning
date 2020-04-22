@@ -1,4 +1,5 @@
 from src.room import Room
+from src.character import Enemy
 
 # create rooms
 kitchen = Room("Kitchen")
@@ -28,12 +29,42 @@ hallway.link_room(powder_room, "south")
 hallway.link_room(kitchen, "west")
 powder_room.link_room(hallway, "north")
 
-# move around
-current_room = hallway
+# characters
+dave = Enemy("Dave", "A smelly zombie")
+dave.set_conversation("Brainnnnnnns....")
+dave.set_weakness("cheese")
 
-while True:
+zombot = Enemy("Zombot", "A hi-tech zombie that is made of metal")
+zombot.set_weakness("water")
+
+# place a character in room
+dining.set_character(dave)
+hallway.set_character(zombot)
+
+# move around
+current_room = dining
+dead = False
+
+while dead is False:
     print("\n")
     current_room.get_details()
+    inhabitant = current_room.get_character() #check character
+    if inhabitant is not None:
+        inhabitant.describe()
     command = input("> ")
-    current_room = current_room.move(command)
+    if command in ["north", "south", "east", "west"]:
+        current_room = current_room.move(command)
+    elif command == "fight":
+        print("What will you fight with?")
+        weapon = input()
+        if inhabitant.fight(weapon) == True:
+            current_room.remove_character()
+        else:
+            print("***Game over***")
+            dead = True
+
+
+
+
+
 

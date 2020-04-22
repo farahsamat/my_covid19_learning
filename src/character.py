@@ -46,6 +46,13 @@ class Enemy(Character): #Note: Character is called the superclass of Enemy, and 
             print(self.name + " crushes you, puny adventurer")
             return False
 
+    def talk(self):
+        if self.conversation is not None:
+            print("[" + self.name + " says]: " + self.conversation)
+        else:
+            print(self.name + " doesn't want to talk to you")
+
+
 
 
 
