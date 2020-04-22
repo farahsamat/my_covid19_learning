@@ -1,4 +1,10 @@
-from src.character import Character
+from src.character import Enemy
 
-dave = Character("Dave", "A smelly zombie")
-dave.describe()
+dave = Enemy("Dave", "A smelly zombie")
+dave.set_weakness("cheese")
+
+dave.get_weakness()
+
+print("What will you fight with?")
+fight_with = input()
+dave.fight(fight_with)
